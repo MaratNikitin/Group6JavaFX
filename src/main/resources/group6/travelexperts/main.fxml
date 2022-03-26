@@ -1,16 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
-
 <?import javafx.scene.control.Button?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="group6.travelexperts.Main">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-    </padding>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-    <Label fx:id="welcomeText"/>
-    <Button text="Hello!" onAction="#onHelloButtonClick"/>
-</VBox>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="499.0" prefWidth="526.0" style="-fx-background-color: #FAEBD7; -fx-border-radius: 7;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group6.travelexperts.MainController">
+   <children>
+      <Label layoutX="16.0" layoutY="46.0" prefHeight="51.0" prefWidth="340.0" text="Welcome To Travel Experts!" textFill="MAROON" AnchorPane.leftAnchor="16.0" AnchorPane.topAnchor="46.0">
+         <font>
+            <Font name="Arial Bold Italic" size="25.0" />
+         </font>
+      </Label>
+      <Label layoutX="109.0" layoutY="205.0" text="Choose a table and then open it:" textFill="MAROON" AnchorPane.leftAnchor="109.0" AnchorPane.topAnchor="205.0">
+         <font>
+            <Font name="Arial Bold" size="20.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="151.0" fitWidth="152.0" layoutX="360.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0">
+         <image>
+            <Image url="@../../pictures/sunset.jpg" />
+         </image>
+      </ImageView>
+      <RadioButton fx:id="radioPackages" layoutX="109.0" layoutY="266.0" mnemonicParsing="false" selected="true" text="Packages" textFill="MAROON" AnchorPane.leftAnchor="109.0" AnchorPane.topAnchor="266.0">
+         <font>
+            <Font name="Arial Bold" size="18.0" />
+         </font>
+         <toggleGroup>
+            <ToggleGroup fx:id="Tables" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton fx:id="radioProducts" layoutX="109.0" layoutY="328.0" mnemonicParsing="false" text="Products" textFill="MAROON" toggleGroup="$Tables" AnchorPane.leftAnchor="109.0" AnchorPane.topAnchor="328.0">
+         <font>
+            <Font name="Arial Bold" size="18.0" />
+         </font>
+      </RadioButton>
+      <Button fx:id="btnOpen" layoutX="38.0" layoutY="426.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="95.0" style="-fx-background-color: #A0522D;" text="Open" textFill="WHITE" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="40.0">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnExit" layoutX="388.0" layoutY="426.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="95.0" style="-fx-background-color: #A0522D;" text="Exit" textFill="WHITE" AnchorPane.bottomAnchor="40.0" AnchorPane.rightAnchor="40.0">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

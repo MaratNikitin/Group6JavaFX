@@ -11,8 +11,11 @@ public class TravelExpertsApp extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(TravelExpertsApp.class.getResource("main.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
-        stage.setTitle("Hello!");
+        Scene scene = new Scene(fxmlLoader.load());
+        // uploading a .css stylesheet:
+        String css = this.getClass().getResource("/css/styles.css").toExternalForm();
+        scene.getStylesheets().add(css);
+        stage.setTitle("Travel Experts - Main Window");
         stage.setScene(scene);
         stage.show();
     }
