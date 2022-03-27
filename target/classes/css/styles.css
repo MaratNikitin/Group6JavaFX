@@ -9,7 +9,6 @@ This app allows doing CRUD operations in select tables of the 'travelexperts' My
 Custom CSS styles for TableViews are set in this file.
 */
 
-
 .table-view {
     -fx-background-color: #800000;
 }
