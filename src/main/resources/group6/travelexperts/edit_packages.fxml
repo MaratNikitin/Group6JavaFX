@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="561.0" prefWidth="530.0" style="-fx-background-color: #FAEBD7;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group6.travelexperts.PackageEditController">
+   <children>
+      <Button fx:id="btnSavePkgChanges" layoutX="47.0" layoutY="485.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="159.0" style="-fx-background-color: #A0522D;" text="Save Changes" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnDeletePkg" layoutX="325.0" layoutY="485.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="159.0" style="-fx-background-color: #A0522D;" text="Delete Package" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Button>
+      <TextField fx:id="txtPackageID" editable="false" layoutX="167.0" layoutY="93.0" prefHeight="35.0" prefWidth="345.0" promptText="Edit is not allowed in this text field" style="-fx-border-color: #800000; -fx-border-radius: 5; -fx-background-color: #FAF0E6; -fx-text-fill: #800000;">
+         <font>
+            <Font name="Arial" size="18.0" />
+         </font>
+      </TextField>
+      <Label fx:id="lblPackageID" layoutX="25.0" layoutY="100.0" text="Package ID:" textFill="MAROON">
+         <font>
+            <Font name="Arial Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblSelectAgentID1" layoutX="25.0" layoutY="150.0" text="Package Name:" textFill="MAROON">
+         <font>
+            <Font name="Arial Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblSelectAgentID11" layoutX="25.0" layoutY="201.0" text="Start Date:" textFill="MAROON">
+         <font>
+            <Font name="Arial Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblSelectAgentID111" layoutX="25.0" layoutY="253.0" text="End Date:" textFill="MAROON">
+         <font>
+            <Font name="Arial Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblSelectAgentID1111" layoutX="25.0" layoutY="303.0" text="Description:" textFill="MAROON">
+         <font>
+            <Font name="Arial Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblSelectAgentID11111" layoutX="25.0" layoutY="354.0" text="Base Price, $:" textFill="MAROON">
+         <font>
+            <Font name="Arial Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblSelectAgentID111111" layoutX="25.0" layoutY="402.0" text="Commission, $:" textFill="MAROON">
+         <font>
+            <Font name="Arial Bold" size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtPackageName" layoutX="167.0" layoutY="143.0" prefHeight="35.0" prefWidth="345.0" promptText="&lt;=50 characters" style="-fx-border-color: #800000; -fx-border-radius: 5; -fx-background-color: #FAF0E6; -fx-text-fill: #800000;">
+         <font>
+            <Font name="Arial" size="18.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="txtStartDate" layoutX="167.0" layoutY="194.0" prefHeight="35.0" prefWidth="345.0" promptText="YYYY-MM-DD" style="-fx-border-color: #800000; -fx-border-radius: 5; -fx-background-color: #FAF0E6; -fx-text-fill: #800000;">
+         <font>
+            <Font name="Arial" size="18.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="txtEndDate" layoutX="167.0" layoutY="246.0" prefHeight="35.0" prefWidth="345.0" promptText="YYYY-MM-DD" style="-fx-border-color: #800000; -fx-border-radius: 5; -fx-background-color: #FAF0E6; -fx-text-fill: #800000;">
+         <font>
+            <Font name="Arial" size="18.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="txtDescription" layoutX="167.0" layoutY="296.0" prefHeight="35.0" prefWidth="345.0" promptText="&lt;=50 characters" style="-fx-border-color: #800000; -fx-border-radius: 5; -fx-background-color: #FAF0E6; -fx-text-fill: #800000;">
+         <font>
+            <Font name="Arial" size="18.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="txtBasePrice" layoutX="167.0" layoutY="347.0" prefHeight="35.0" prefWidth="345.0" promptText="Just a positive number value" style="-fx-border-color: #800000; -fx-border-radius: 5; -fx-background-color: #FAF0E6; -fx-text-fill: #800000;">
+         <font>
+            <Font name="Arial" size="18.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="txtCommission" layoutX="167.0" layoutY="395.0" prefHeight="35.0" prefWidth="345.0" promptText="Just a positive number value" style="-fx-border-color: #800000; -fx-border-radius: 5; -fx-background-color: #FAF0E6; -fx-text-fill: #800000;">
+         <font>
+            <Font name="Arial" size="18.0" />
+         </font>
+      </TextField>
+      <Label fx:id="lblAddDeletePkg" layoutX="128.0" layoutY="29.0" text="Add / Edit or Delete Package:" textFill="MAROON">
+         <font>
+            <Font name="Arial Bold" size="20.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

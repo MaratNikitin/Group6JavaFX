@@ -1,17 +1,29 @@
-/**
- * Sample Skeleton for 'main.fxml' Controller Class
- */
+/*
+Author: Marat Nikitin;
+Co-Author: , contribution: ;
+Workshop #6 (JavaFX),
+PROJ-207 Threaded Project, Stage 3, Workshop #6 (JavaFX),
+OOSD program, SAIT, March-May 2022;
+This app allows doing CRUD operations in select tables of the 'travelexperts' MySQL database
+    using a friendly JavaFX GUI.
+This is the controller class responsible for the Main window.
+*/
 
 package group6.travelexperts;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class MainController {
@@ -39,11 +51,6 @@ public class MainController {
 
     @FXML // This method is called by the FXMLLoader when initialization is complete
     void initialize() {
-        assert Tables != null : "fx:id=\"Tables\" was not injected: check your FXML file 'main.fxml'.";
-        assert btnExit != null : "fx:id=\"btnExit\" was not injected: check your FXML file 'main.fxml'.";
-        assert btnOpen != null : "fx:id=\"btnSave\" was not injected: check your FXML file 'main.fxml'.";
-        assert radioPackages != null : "fx:id=\"radioPackages\" was not injected: check your FXML file 'main.fxml'.";
-        assert radioProducts != null : "fx:id=\"radioProducts\" was not injected: check your FXML file 'main.fxml'.";
 
         // when 'Exit' button is clicked, the app closes:
         btnExit.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -55,13 +62,63 @@ public class MainController {
                 alert.setContentText("Press 'Ok' button if you want to close the app, " +
                         "and 'Cancel' otherwise");
                 Optional<ButtonType> result = alert.showAndWait();
+
                 // the app will be closed only if closure was confirmed by a user:
                 if (result.get() == ButtonType.OK) { // true if Ok button was pressed
                     Stage stage = (Stage) btnExit.getScene().getWindow();
                     stage.close(); // this leads to closing the app
                 } // end of if statement
-
             } // end of handle method
         }); // end of click event handler
-    }
-}
+
+        // when 'Open' button is clicked, selected table's window is opened:
+        btnOpen.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                if(Tables.getSelectedToggle().equals(radioPackages)){ // true if 'Packages' option was selected
+                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("packages.fxml"));
+                    Parent parent = null;
+                    try {
+                        parent = fxmlLoader.load();
+                    }
+                    catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    // opening the 'packages' window:
+                    PackageController packageController = fxmlLoader.<PackageController>getController();
+                    Scene scene = new Scene(parent);
+                    Stage stage = new Stage();
+                    String css = this.getClass().getResource("/css/styles.css").toExternalForm();
+                    scene.getStylesheets().add(css); // applying an external stylesheet
+                    stage.setTitle("Travel Packages"); // setting window's title
+                    stage.initModality(Modality.APPLICATION_MODAL);
+                    stage.setScene(scene);
+                    stage.showAndWait();
+                }
+                else // it means that 'Products' radio option was selected
+                {
+                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("products.fxml"));
+                    Parent parent = null;
+                    try {
+                        parent = fxmlLoader.load();
+                    }
+                    catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    // opening the 'products' window:
+                    ProductsController productsController = fxmlLoader.<ProductsController>getController();
+                    Scene scene = new Scene(parent);
+                    Stage stage = new Stage();
+                    String css = this.getClass().getResource("/css/styles.css").toExternalForm();
+                    scene.getStylesheets().add(css); // applying an external stylesheet
+                    stage.setTitle("Products"); // setting window's title
+                    stage.initModality(Modality.APPLICATION_MODAL);
+                    stage.setScene(scene);
+                    stage.showAndWait();
+                } // end of else
+            } // end of habdle()
+        }); // end of 'btnOpen.setOnMouseClicked()'
+    } // end of initialize()
+} // end of MainController

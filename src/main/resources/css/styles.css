@@ -1,3 +1,50 @@
+/*
+Author: Marat Nikitin;
+Co-Author: , contribution: ;
+Workshop #6 (JavaFX),
+PROJ-207 Threaded Project, Stage 3, Workshop #6 (JavaFX),
+OOSD program, SAIT, March-May 2022;
+This app allows doing CRUD operations in select tables of the 'travelexperts' MySQL database
+    using a friendly JavaFX GUI.
+Custom CSS styles for TableViews are set in this file.
+*/
+
+.table-view {
+    -fx-background-color: #800000;
+}
+
+.table-view .column-header {
+    -fx-background-color: #A0522D;
+    -fx-font-size: 12pt;
+    -fx-font-family: Arial;
+    -fx-text-fill: #800000;
+}
+
+.table-row-cell:odd {
+    -fx-background-color: #FAEBD7;
+}
+
+.table-row-cell:even {
+    -fx-background-color: #FFFFF0;
+}
+
+.table-row-cell:hover {
+    -fx-background-color: #AFEEEE;
+}
+
+.table-cell {
+    -fx-text-fill: #800000;
+    -fx-font-size: 12pt;
+    -fx-font-family: Arial;
+    -fx-alignment: center;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: #FFFFFF;
+}
+
+
+
 
 
 
