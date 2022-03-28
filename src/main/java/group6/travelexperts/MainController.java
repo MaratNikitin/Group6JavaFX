@@ -118,7 +118,7 @@ public class MainController {
                     stage.setScene(scene);
                     stage.showAndWait();
                 } // end of else
-            } // end of habdle()
+            } // end of handle()
         }); // end of 'btnOpen.setOnMouseClicked()'
     } // end of initialize()
 } // end of MainController
