@@ -180,8 +180,8 @@ public class PackageEditController {
         txtEndDate.setText(formattedEndDate);
 
         txtDescription.setText(p.getPkgDesc());
-        txtBasePrice.setText(p.getPkgBasePrice() + "");
-        txtCommission.setText(p.getPkgAgencyCommission() + "");
+        txtBasePrice.setText(String.valueOf(p.getPkgBasePrice()));
+        txtCommission.setText(String.valueOf(p.getPkgAgencyCommission()));
     }
 
     // this method is executed when the "Save Changes" button is clicked:

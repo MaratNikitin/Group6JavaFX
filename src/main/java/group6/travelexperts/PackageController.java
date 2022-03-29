@@ -12,8 +12,11 @@ This is the controller class responsible for the 'Packages' window.
 package group6.travelexperts;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.net.URL;
 import java.sql.*;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.ResourceBundle;
 
@@ -50,10 +53,10 @@ public class PackageController {
     private TableColumn<Package, Integer> colPackageId; // Value injected by FXMLLoader
 
     @FXML // fx:id="colPkgAgencyCommission"
-    private TableColumn<Package, Double> colPkgAgencyCommission; // Value injected by FXMLLoader
+    private TableColumn<Package, String> colPkgAgencyCommission; // Value injected by FXMLLoader
 
     @FXML // fx:id="colPkgBasePrice"
-    private TableColumn<Package, Double> colPkgBasePrice; // Value injected by FXMLLoader
+    private TableColumn<Package, String> colPkgBasePrice; // Value injected by FXMLLoader
 
     @FXML // fx:id="colPkgDesc"
     private TableColumn<Package, String> colPkgDesc; // Value injected by FXMLLoader
@@ -84,8 +87,8 @@ public class PackageController {
         colPkgStartDate.setCellValueFactory(new PropertyValueFactory<Package, String>("pkgStartDate"));
         colPkgEndDate.setCellValueFactory(new PropertyValueFactory<Package, String>("pkgEndDate"));
         colPkgDesc.setCellValueFactory(new PropertyValueFactory<Package, String>("pkgDesc"));
-        colPkgBasePrice.setCellValueFactory(new PropertyValueFactory<Package, Double>("pkgBasePrice"));
-        colPkgAgencyCommission.setCellValueFactory(new PropertyValueFactory<Package, Double>("pkgAgencyCommission"));
+        colPkgBasePrice.setCellValueFactory(new PropertyValueFactory<Package, String>("pkgBasePrice"));
+        colPkgAgencyCommission.setCellValueFactory(new PropertyValueFactory<Package, String>("pkgAgencyCommission"));
 
         // Populating the TableView with data from the DB using data binding:
         tvPackages.setItems(data);
@@ -170,10 +173,11 @@ public class PackageController {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("select PackageId, PkgName, DATE_FORMAT(PkgStartDate, \"%Y-%m-%d\"), " +
                     "DATE_FORMAT(PkgEndDate, \"%Y-%m-%d\"), PkgDesc, PkgBasePrice, PkgAgencyCommission from packages");
+            NumberFormat formatter = new DecimalFormat("0.00");
             while (rs.next())
             {
                 data.add(new Package(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4),
-                        rs.getString(5), rs.getDouble(6), rs.getDouble(7)));
+                        rs.getString(5), formatter.format(rs.getBigDecimal(6)), formatter.format(rs.getBigDecimal(7))));
             }
             conn.close();
         } catch (SQLException e) {
