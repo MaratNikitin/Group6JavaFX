@@ -9,12 +9,12 @@
 
 <AnchorPane prefHeight="584.0" prefWidth="1124.0" style="-fx-background-color: #FAEBD7;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group6.travelexperts.PackageController">
    <children>
-      <Label layoutX="401.0" layoutY="22.0" text="Select a package to edit or delete:" textFill="MAROON">
+      <Label layoutX="401.0" layoutY="22.0" text="Select a package to edit or delete:" textFill="MAROON" AnchorPane.topAnchor="22.0">
          <font>
             <Font name="Arial Bold" size="20.0" />
          </font>
       </Label>
-      <TableView fx:id="tvPackages" layoutX="7.0" layoutY="67.0" prefHeight="430.0" prefWidth="1112.0">
+      <TableView fx:id="tvPackages" layoutX="7.0" layoutY="67.0" prefHeight="430.0" prefWidth="1112.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="65.0">
         <columns>
           <TableColumn fx:id="colPackageId" prefWidth="111.0" text="Package ID" />
           <TableColumn fx:id="colPkgName" prefWidth="162.0" text="Package Name" />
@@ -25,7 +25,7 @@
             <TableColumn fx:id="colPkgAgencyCommission" prefWidth="126.0" text="Commission, $" />
         </columns>
       </TableView>
-      <Button fx:id="btnAddPackage" layoutX="463.0" layoutY="519.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="199.0" style="-fx-background-color: #A0522D;" text="Add a New Package" textFill="WHITE">
+      <Button fx:id="btnAddPackage" layoutX="463.0" layoutY="519.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="199.0" style="-fx-background-color: #A0522D;" text="Add a New Package" textFill="WHITE" AnchorPane.bottomAnchor="26.0">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
