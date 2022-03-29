@@ -14,6 +14,8 @@ package group6.travelexperts;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.ResourceBundle;
 
@@ -171,8 +173,9 @@ public class PackageController {
             ResultSet rs = stmt.executeQuery("select * from packages");
             while (rs.next())
             {
+                NumberFormat formatter = new DecimalFormat("0.00");
                 data.add(new Package(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4),
-                        rs.getString(5), rs.getDouble(6), rs.getDouble(7)));
+                        rs.getString(5), formatter.format(rs.getBigDecimal(6)), formatter.format(rs.getBigDecimal(7))));
             }
             conn.close();
         } catch (SQLException e) {

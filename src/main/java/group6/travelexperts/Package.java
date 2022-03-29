@@ -11,11 +11,10 @@ This is the 'Package' class representing 'packages' database entity.
 
 package group6.travelexperts;
 
-import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
-import java.text.SimpleDateFormat;
+import java.math.BigDecimal;
 
 public class Package {
     // defining class variables:
@@ -24,21 +23,21 @@ public class Package {
     private SimpleStringProperty pkgStartDate;
     private SimpleStringProperty pkgEndDate;
     private SimpleStringProperty pkgDesc;
-    private SimpleDoubleProperty pkgBasePrice;
-    private SimpleDoubleProperty pkgAgencyCommission;
+    private BigDecimal pkgBasePrice;
+    private BigDecimal pkgAgencyCommission;
 
     // complete constructor with conversion to 'Simple*Properties':
     public Package(int packageId, String pkgName,
                    String pkgStartDate, String pkgEndDate,
-                   String pkgDesc, double pkgBasePrice,
-                   double pkgAgencyCommission) {
+                   String pkgDesc, String pkgBasePrice,
+                   String pkgAgencyCommission) {
         this.packageId = new SimpleIntegerProperty(packageId);
         this.pkgName = new SimpleStringProperty(pkgName);
         this.pkgStartDate = new SimpleStringProperty(pkgStartDate);
         this.pkgEndDate = new SimpleStringProperty(pkgEndDate);
         this.pkgDesc = new SimpleStringProperty(pkgDesc);
-        this.pkgBasePrice = new SimpleDoubleProperty(pkgBasePrice);
-        this.pkgAgencyCommission = new SimpleDoubleProperty(pkgAgencyCommission);
+        this.pkgBasePrice = new BigDecimal(pkgBasePrice);
+        this.pkgAgencyCommission = new BigDecimal(pkgAgencyCommission);
     }
 
     // getters and setters for all class variables:
@@ -103,27 +102,19 @@ public class Package {
         this.pkgDesc.set(pkgDesc);
     }
 
-    public double getPkgBasePrice() {
-        return pkgBasePrice.get();
-    }
-
-    public SimpleDoubleProperty pkgBasePriceProperty() {
+    public BigDecimal getPkgBasePrice() {
         return pkgBasePrice;
     }
 
-    public void setPkgBasePrice(double pkgBasePrice) {
-        this.pkgBasePrice.set(pkgBasePrice);
+    public void setPkgBasePrice(BigDecimal pkgBasePrice) {
+        this.pkgBasePrice = pkgBasePrice;
     }
 
-    public double getPkgAgencyCommission() {
-        return pkgAgencyCommission.get();
-    }
-
-    public SimpleDoubleProperty pkgAgencyCommissionProperty() {
+    public BigDecimal getPkgAgencyCommission() {
         return pkgAgencyCommission;
     }
 
-    public void setPkgAgencyCommission(double pkgAgencyCommission) {
-        this.pkgAgencyCommission.set(pkgAgencyCommission);
+    public void setPkgAgencyCommission(BigDecimal pkgAgencyCommission) {
+        this.pkgAgencyCommission = pkgAgencyCommission;
     }
 }
