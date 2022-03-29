@@ -168,7 +168,8 @@ public class PackageController {
             // connecting to the DB:
             Connection conn = DriverManager.getConnection(url, user, password); // establishing DB connection
             Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("select * from packages");
+            ResultSet rs = stmt.executeQuery("select PackageId, PkgName, DATE_FORMAT(PkgStartDate, \"%Y-%m-%d\"), " +
+                    "DATE_FORMAT(PkgEndDate, \"%Y-%m-%d\"), PkgDesc, PkgBasePrice, PkgAgencyCommission from packages");
             while (rs.next())
             {
                 data.add(new Package(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4),

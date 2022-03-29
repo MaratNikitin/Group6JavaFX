@@ -7,20 +7,20 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="584.0" prefWidth="526.0" style="-fx-background-color: #FAEBD7;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group6.travelexperts.ProductsController">
+<AnchorPane prefHeight="584.0" prefWidth="468.0" style="-fx-background-color: #FAEBD7;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group6.travelexperts.ProductsController">
    <children>
-      <Label fx:id="lblProductsHeader" layoutX="105.0" layoutY="14.0" text="Select a product to edit or delete:" textFill="MAROON">
+      <Label fx:id="lblProductsHeader" layoutX="76.0" layoutY="22.0" text="Select a product to edit or delete:" textFill="MAROON" AnchorPane.topAnchor="20.0">
          <font>
             <Font name="Arial Bold" size="20.0" />
          </font>
       </Label>
-      <TableView fx:id="tvProducts" layoutX="112.0" layoutY="57.0" prefHeight="430.0" prefWidth="303.0">
+      <TableView fx:id="tvProducts" layoutX="50.0" layoutY="60.0" prefHeight="430.0" prefWidth="365.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="60.0">
          <columns>
-            <TableColumn fx:id="colProductId" prefWidth="111.0" text="Product ID" />
-            <TableColumn fx:id="colProdName" prefWidth="191.0" text="Product Name" />
+            <TableColumn fx:id="colProductId" prefWidth="129.0" text="Product ID" />
+            <TableColumn fx:id="colProdName" prefWidth="228.0" text="Product Name" />
          </columns>
       </TableView>
-      <Button fx:id="btnAddProduct" layoutX="164.0" layoutY="514.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="199.0" style="-fx-background-color: #A0522D;" text="Add a New Product" textFill="WHITE">
+      <Button fx:id="btnAddProduct" layoutX="133.0" layoutY="516.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="199.0" style="-fx-background-color: #A0522D;" text="Add a New Product" textFill="WHITE" AnchorPane.bottomAnchor="30.0">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
