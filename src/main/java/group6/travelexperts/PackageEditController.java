@@ -1,6 +1,6 @@
 /*
 Author: Marat Nikitin;
-Co-Author: Arvin San Juan, contribution: Data Validation Implement;
+Co-Author: Arvin San Juan, contribution: data validation implement;
 Workshop #6 (JavaFX),
 PROJ-207 Threaded Project, Stage 3, Workshop #6 (JavaFX),
 OOSD program, SAIT, March-May 2022;
