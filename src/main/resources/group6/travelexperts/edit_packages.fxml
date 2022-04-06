@@ -93,5 +93,16 @@
             <Font name="Arial Bold" size="20.0" />
          </font>
       </Label>
+      <Label fx:id="lblPkgName" layoutX="167.0" layoutY="177.0" prefHeight="17.0" prefWidth="345.0" text="more than 50 characters is not allowed" textFill="#eb0707" />
+      <Label fx:id="lblPkgStartDate" layoutX="167.0" layoutY="228.0" prefHeight="17.0" prefWidth="345.0" text="incorrect format of date" textFill="#eb0707" />
+      <Label fx:id="lblPkgStartDateAlert" layoutX="167.0" layoutY="228.0" prefHeight="17.0" prefWidth="345.0" text="The start date must be less than or equals to end date" textFill="#eb0707" />
+      <Label fx:id="lblPkgEndDate" layoutX="168.0" layoutY="279.0" prefHeight="17.0" prefWidth="345.0" text="incorrect format of date" textFill="#eb0707" />
+      <Label fx:id="lblPkgEndDateAlert" layoutX="168.0" layoutY="279.0" prefHeight="17.0" prefWidth="345.0" text="The end date must be greater than or equals to start date" textFill="#eb0707" />
+      <Label fx:id="lblPkgPrice" layoutX="168.0" layoutY="378.0" prefHeight="17.0" prefWidth="345.0" text="enter positive number value" textFill="#eb0707" />
+      <Label fx:id="lblPkgPriceAlert" layoutX="168.0" layoutY="378.0" prefHeight="17.0" prefWidth="345.0" text="the base price must be greater than to commission" textFill="#eb0707" />
+      <Label fx:id="lblPkgDescription" layoutX="168.0" layoutY="330.0" prefHeight="17.0" prefWidth="345.0" text="more than 50 characters is not allowed" textFill="#eb0707" />
+      <Label fx:id="lblPkgCommission" layoutX="168.0" layoutY="428.0" prefHeight="17.0" prefWidth="345.0" text="enter positive number value" textFill="#eb0707" />
+      <Label fx:id="lblPkgCommissionAlert" layoutX="168.0" layoutY="428.0" prefHeight="17.0" prefWidth="345.0" text="the commission must be less than to base price" textFill="#eb0707" />
+
    </children>
 </AnchorPane>

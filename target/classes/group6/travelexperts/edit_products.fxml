@@ -43,5 +43,6 @@
             <Font name="Arial Bold" size="20.0" />
          </font>
       </Label>
+      <Label fx:id="lblProdName" layoutX="168.0" layoutY="178.0" prefHeight="17.0" prefWidth="345.0" text="more than 50 characters is not allowed" textFill="#eb0707" />
    </children>
 </AnchorPane>

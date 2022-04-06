@@ -1,6 +1,6 @@
 /*
 Author: Marat Nikitin;
-Co-Author: Arvin San Juan, contribution: data validation implement;
+Co-Author: , contribution: ;
 Workshop #6 (JavaFX),
 PROJ-207 Threaded Project, Stage 3, Workshop #6 (JavaFX),
 OOSD program, SAIT, March-May 2022;
@@ -11,22 +11,19 @@ This is the controller class responsible for the 'Add/Edit/Delete Packages' wind
 
 package group6.travelexperts;
 
-import java.net.URL;
-import java.sql.*;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Optional;
-import java.util.ResourceBundle;
-
-import javafx.event.EventHandler;
-import javafx.fxml.FXML;
-import javafx.scene.Node;
+import javafx.beans.value.*;
+import javafx.event.*;
+import javafx.fxml.*;
+import javafx.scene.*;
 import javafx.scene.control.*;
-import javafx.scene.input.MouseEvent;
-import javafx.stage.Stage;
+import javafx.scene.input.*;
+import javafx.stage.*;
 
-import java.text.DateFormat;
+import java.net.*;
+import java.sql.*;
+import java.text.*;
+import java.util.Date;
+import java.util.*;
 
 public class PackageEditController {
 
@@ -89,6 +86,37 @@ public class PackageEditController {
 
     private String mode;
 
+    @FXML // fx:id="lblPkgName"
+    private Label lblPkgName; // Value injected by FXMLLoader
+
+    @FXML // fx:id="lblPkgStartDate"
+    private Label lblPkgStartDate; // Value injected by FXMLLoader
+
+    @FXML // fx:id="lblPkgStartDateAlert"
+    private Label lblPkgStartDateAlert; // Value injected by FXMLLoader
+
+    @FXML // fx:id="lblPkgEndDate"
+    private Label lblPkgEndDate; // Value injected by FXMLLoader
+
+    @FXML // fx:id="lblPkgEndDateAlert"
+    private Label lblPkgEndDateAlert; // Value injected by FXMLLoader
+
+    @FXML // fx:id="lblPkgPrice"
+    private Label lblPkgPrice; // Value injected by FXMLLoader
+
+    @FXML // fx:id="lblPkgPriceAlert"
+    private Label lblPkgPriceAlert; // Value injected by FXMLLoader
+
+    @FXML // fx:id="lblPkgDescription"
+    private Label lblPkgDescription; // Value injected by FXMLLoader
+
+    @FXML // fx:id="lblPkgCommission"
+    private Label lblPkgCommission; // Value injected by FXMLLoader
+
+    @FXML // fx:id="lblPkgCommissionAlert"
+    private Label lblPkgCommissionAlert; // Value injected by FXMLLoader
+
+
     @FXML // This method is called by the FXMLLoader when initialization is complete
     void initialize() {
 
@@ -122,7 +150,7 @@ public class PackageEditController {
                     alert.setContentText("Press 'Ok' button if you want to delete the package, " +
                             "and 'Cancel' otherwise");
                     Optional<ButtonType> result = alert.showAndWait();
-                    // the delete will be executed only if it was confirmed by a user:
+                    // to delete will be executed only if it was confirmed by a user:
                     if (result.get() == ButtonType.OK) { // true if Ok button was pressed
                         int numRows = stmt.executeUpdate();
                     } // end of if statement
@@ -145,7 +173,247 @@ public class PackageEditController {
             }
         });
 
+        txtPackageName.focusedProperty().addListener(new ChangeListener<Boolean>()
+        {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> arg0, Boolean oldPropertyValue, Boolean newPropertyValue)
+            {
+                if (newPropertyValue)
+                {
+                    lblPkgName.setVisible(false);
+                }
+                else
+                {
+                    if (txtPackageName.getText().length() > 50)
+                    {
+                        System.out.println("The Package Name must be less than or equal 50 characters.");
+                        lblPkgName.setVisible(true);
+                    }
+                    else
+                    {
+                        System.out.println("The Package Name is " + txtPackageName.getText());
+                        lblPkgName.setVisible(false);
+                    }
+                }
+            }
+        });
+
+        txtStartDate.focusedProperty().addListener(new ChangeListener<Boolean>()
+        {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> arg0, Boolean oldPropertyValue, Boolean newPropertyValue)
+            {
+                if (newPropertyValue)
+                {
+                    lblPkgStartDate.setVisible(false);
+                }
+                else
+                {
+                    if (txtStartDate.getText()  != "")
+                    {
+                        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+                        //To make strict date format validation
+                        formatter.setLenient(false);
+                        Date parsedDate = null;
+                        try {
+                            parsedDate = formatter.parse(txtStartDate.getText());
+                            System.out.println("StartDate is " + formatter.format(parsedDate));
+                            lblPkgStartDate.setVisible(false);
+                        } catch (ParseException e) {
+                            lblPkgStartDate.setVisible(true);
+                        }
+                    }
+                }
+                checkDates();
+            }
+        });
+
+        txtEndDate.focusedProperty().addListener(new ChangeListener<Boolean>()
+        {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> arg0, Boolean oldPropertyValue, Boolean newPropertyValue)
+            {
+                if (newPropertyValue)
+                {
+                    lblPkgEndDate.setVisible(false);
+                }
+                else
+                {
+                    if (txtEndDate.getText() != "")
+                    {
+                        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+                        //To make strict date format validation
+                        formatter.setLenient(false);
+                        Date parsedDate = null;
+                        try {
+                            parsedDate = formatter.parse(txtEndDate.getText());
+                            System.out.println("EndDate is " + formatter.format(parsedDate));
+                            lblPkgEndDate.setVisible(false);
+                        } catch (ParseException e) {
+                            lblPkgEndDate.setVisible(true);
+                        }
+                    }
+                }
+                checkDates();
+            }
+        });
+
+        txtDescription.focusedProperty().addListener(new ChangeListener<Boolean>()
+        {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> arg0, Boolean oldPropertyValue, Boolean newPropertyValue)
+            {
+                if (newPropertyValue)
+                {
+                    lblPkgDescription.setVisible(false);
+                }
+                else
+                {
+                    if (txtDescription.getText().length() > 50)
+                    {
+                        lblPkgDescription.setVisible(true);
+                    }
+                    else
+                    {
+                        if (txtDescription.getText() != "")
+                        {
+                            System.out.println("The Description is " + txtDescription.getText());
+                        }
+                        lblPkgDescription.setVisible(false);
+                    }
+                }
+            }
+        });
+
+        //accept only decimal
+        txtBasePrice.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (!newValue.matches("\\d*(\\.\\d*)?")) {
+                    txtBasePrice.setText(oldValue);
+                }
+            }
+        });
+
+        txtBasePrice.focusedProperty().addListener(new ChangeListener<Boolean>()
+        {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> arg0, Boolean oldPropertyValue, Boolean newPropertyValue)
+            {
+                if (newPropertyValue)
+                {
+                    lblPkgPrice.setVisible(false);
+                }
+                else
+                {
+                    if (txtBasePrice.getText() != "")
+                    {
+                        double res = Math.signum(Double.parseDouble(txtBasePrice.getText()));
+                        if (res == 1.0)
+                        {
+                            System.out.println("The Base Price is " + Double.parseDouble(txtBasePrice.getText()));
+                            lblPkgPrice.setVisible(false);
+                        }
+                        else
+                        {
+                            lblPkgPrice.setVisible(true);
+                        }
+                    }
+                }
+                checkPriceCommission();
+            }
+        });
+
+        //accept only decimal
+        txtCommission.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (!newValue.matches("\\d*(\\.\\d*)?")) {
+                    txtCommission.setText(oldValue);
+                }
+            }
+        });
+
+        txtCommission.focusedProperty().addListener(new ChangeListener<Boolean>()
+        {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> arg0, Boolean oldPropertyValue, Boolean newPropertyValue)
+            {
+                if (newPropertyValue)
+                {
+                    lblPkgCommission.setVisible(false);
+                }
+                else
+                {
+                    if (txtCommission.getText() != "")
+                    {
+                        double res = Math.signum(Double.parseDouble(txtCommission.getText()));
+                        if (res == 1.0)
+                        {
+                            System.out.println("The Commission is " + Double.parseDouble(txtCommission.getText()));
+                            lblPkgCommission.setVisible(false);
+                        }
+                        else
+                        {
+                            lblPkgCommission.setVisible(true);
+                        }
+                    }
+                }
+                checkPriceCommission();
+            }
+        });
+
+        //alert messages sets as not visible
+        lblPkgName.setVisible(false);
+        lblPkgStartDate.setVisible(false);
+        lblPkgStartDateAlert.setVisible(false);
+        lblPkgEndDate.setVisible(false);
+        lblPkgEndDateAlert.setVisible(false);
+        lblPkgPrice.setVisible(false);
+        lblPkgPriceAlert.setVisible(false);
+        lblPkgDescription.setVisible(false);
+        lblPkgCommission.setVisible(false);
+        lblPkgCommissionAlert.setVisible(false);
+
     } // end of initialize();
+
+    //check dates
+    public void checkDates(){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            Date StartDate = sdf.parse(txtStartDate.getText());
+            Date EndDate = sdf.parse(txtEndDate.getText());
+            if (StartDate.after(EndDate))
+            {
+                lblPkgStartDateAlert.setVisible(true);
+                lblPkgEndDateAlert.setVisible(true);
+            }
+            else
+            {
+                lblPkgStartDateAlert.setVisible(false);
+                lblPkgEndDateAlert.setVisible(false);
+            }
+            //StartDate.compareTo(EndDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
+    //check Base Price Commission
+    public void checkPriceCommission(){
+        Double BasePrice = Double.parseDouble(txtBasePrice.getText());
+        Double Commission = Double.parseDouble(txtCommission.getText());
+        if(BasePrice > Commission)
+        {
+            lblPkgPriceAlert.setVisible(false);
+            lblPkgCommissionAlert.setVisible(false);
+        }
+        else
+        {
+            lblPkgPriceAlert.setVisible(true);
+            lblPkgCommissionAlert.setVisible(true);
+        }
+    }
 
     // method for passing mode to the dialog window
     public void passModeToDialog(String mode) {
@@ -154,7 +422,7 @@ public class PackageEditController {
         //display the mode on the dialog
         lblAddDeletePkg.setText("Current task: " + mode + " a package");
 
-        //if this is add mode, hide the delete button, as there is nothing to delete
+        //if this is adding mode, hide the delete button, as there is nothing to delete
         if (mode.equals("add"))
         {
             btnDeletePkg.setVisible(false);
@@ -217,13 +485,59 @@ public class PackageEditController {
             if (mode.equals("edit")) {
                 stmt.setInt(7, Integer.parseInt(txtPackageID.getText()));
             }
-            int numRows = stmt.executeUpdate();
-            conn.close(); // mission accomplished
 
-            // closing the modal window:
-            Node node = (Node) mouseEvent.getSource();
-            Stage stage = (Stage) node.getScene().getWindow();
-            stage.close();
+            //filter text fields if empty
+            if (!txtPackageName.getText().isEmpty()
+                    && !txtStartDate.getText().isEmpty()
+                    && !txtEndDate.getText().isEmpty()
+                    && !txtDescription.getText().isEmpty()
+                    && !txtBasePrice.getText().isEmpty()
+                    && !txtCommission.getText().isEmpty()
+            )
+            {
+                checkDates();
+                checkPriceCommission();
+                if (lblPkgName.isVisible()
+                        || lblPkgStartDate.isVisible()
+                        || lblPkgStartDateAlert.isVisible()
+                        || lblPkgEndDate.isVisible()
+                        || lblPkgEndDateAlert.isVisible()
+                        || lblPkgPriceAlert.isVisible()
+                        || lblPkgDescription.isVisible()
+                        || lblPkgCommission.isVisible()
+                        || lblPkgCommissionAlert.isVisible()
+                )
+                {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Save failed");
+                    alert.setContentText("Please check the validated textfields.");
+                    alert.showAndWait();
+                }
+                else
+                {
+                    lblPkgName.setVisible(false);
+                    lblPkgStartDate.setVisible(false);
+                    lblPkgEndDate.setVisible(false);
+                    lblPkgPrice.setVisible(false);
+                    lblPkgDescription.setVisible(false);
+                    lblPkgCommission.setVisible(false);
+
+                    int numRows = stmt.executeUpdate();
+                    conn.close(); // mission accomplished
+
+                    // closing the modal window:
+                    Node node = (Node) mouseEvent.getSource();
+                    Stage stage = (Stage) node.getScene().getWindow();
+                    stage.close();
+                }
+            }
+            else
+            {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Save failed");
+                alert.setContentText("Please fill up the fields first.");
+                alert.showAndWait();
+            }
 
         } //end of try
         catch (SQLException e) {
@@ -231,4 +545,7 @@ public class PackageEditController {
         } // end of catch
 
     } // end of btnSaveClicked()
+
+
+
 } // end of PackageEditController
