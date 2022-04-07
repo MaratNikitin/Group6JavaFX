@@ -173,6 +173,7 @@ public class PackageEditController {
             }
         });
 
+        // txtPackageName focus in and focus out event
         txtPackageName.focusedProperty().addListener(new ChangeListener<Boolean>()
         {
             @Override
@@ -198,6 +199,7 @@ public class PackageEditController {
             }
         });
 
+        // txtPackageName focus in and focus out event
         txtStartDate.focusedProperty().addListener(new ChangeListener<Boolean>()
         {
             @Override
@@ -228,6 +230,7 @@ public class PackageEditController {
             }
         });
 
+        // txtPackageName focus in and focus out event
         txtEndDate.focusedProperty().addListener(new ChangeListener<Boolean>()
         {
             @Override
@@ -258,6 +261,7 @@ public class PackageEditController {
             }
         });
 
+        // txtPackageName focus in and focus out event
         txtDescription.focusedProperty().addListener(new ChangeListener<Boolean>()
         {
             @Override
@@ -295,6 +299,7 @@ public class PackageEditController {
             }
         });
 
+        // txtPackageName focus in and focus out event
         txtBasePrice.focusedProperty().addListener(new ChangeListener<Boolean>()
         {
             @Override
@@ -334,6 +339,7 @@ public class PackageEditController {
             }
         });
 
+        // txtCommission focus in and focus out event
         txtCommission.focusedProperty().addListener(new ChangeListener<Boolean>()
         {
             @Override
@@ -341,21 +347,22 @@ public class PackageEditController {
             {
                 if (newPropertyValue)
                 {
-                    lblPkgCommission.setVisible(false);
+                    lblPkgCommission.setVisible(false); // set lblPkgCommission as not visible
                 }
                 else
                 {
                     if (txtCommission.getText() != "")
                     {
+                        // this line is to check if the inputed data is negative or positive
                         double res = Math.signum(Double.parseDouble(txtCommission.getText()));
                         if (res == 1.0)
                         {
                             System.out.println("The Commission is " + Double.parseDouble(txtCommission.getText()));
-                            lblPkgCommission.setVisible(false);
+                            lblPkgCommission.setVisible(false);// set lblPkgCommission as not visible
                         }
                         else
                         {
-                            lblPkgCommission.setVisible(true);
+                            lblPkgCommission.setVisible(true);// set lblPkgCommission as visible
                         }
                     }
                 }
@@ -377,7 +384,7 @@ public class PackageEditController {
 
     } // end of initialize();
 
-    //check dates
+    //check start date and end date if in correct format
     public void checkDates(){
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         try {
@@ -393,13 +400,12 @@ public class PackageEditController {
                 lblPkgStartDateAlert.setVisible(false);
                 lblPkgEndDateAlert.setVisible(false);
             }
-            //StartDate.compareTo(EndDate);
         } catch (ParseException e) {
             e.printStackTrace();
         }
     }
 
-    //check Base Price Commission
+    //check Base Price and Commission if Base Price is greater than Commission
     public void checkPriceCommission(){
         Double BasePrice = Double.parseDouble(txtBasePrice.getText());
         Double Commission = Double.parseDouble(txtCommission.getText());
@@ -410,8 +416,26 @@ public class PackageEditController {
         }
         else
         {
-            lblPkgPriceAlert.setVisible(true);
-            lblPkgCommissionAlert.setVisible(true);
+            if(!lblPkgPrice.isVisible())
+            {
+                lblPkgPriceAlert.setVisible(true);
+                lblPkgPrice.setVisible(false);
+            }
+            else
+            {
+                lblPkgPriceAlert.setVisible(false);
+                lblPkgPrice.setVisible(true);
+            }
+            if(!lblPkgCommission.isVisible())
+            {
+                lblPkgCommissionAlert.setVisible(true);
+                lblPkgCommission.setVisible(false);
+            }
+            else
+            {
+                lblPkgCommissionAlert.setVisible(false);
+                lblPkgCommission.setVisible(true);
+            }
         }
     }
 
@@ -495,8 +519,8 @@ public class PackageEditController {
                     && !txtCommission.getText().isEmpty()
             )
             {
-                checkDates();
-                checkPriceCommission();
+                checkDates(); // check date formats
+                checkPriceCommission(); //check base price and commission
                 if (lblPkgName.isVisible()
                         || lblPkgStartDate.isVisible()
                         || lblPkgStartDateAlert.isVisible()
@@ -508,12 +532,13 @@ public class PackageEditController {
                         || lblPkgCommissionAlert.isVisible()
                 )
                 {
+                    // Alert message if text fields is not validated
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Save failed");
                     alert.setContentText("Please check the validated textfields.");
                     alert.showAndWait();
                 }
-                else
+                else //if validated perform the saving method
                 {
                     lblPkgName.setVisible(false);
                     lblPkgStartDate.setVisible(false);
@@ -533,6 +558,7 @@ public class PackageEditController {
             }
             else
             {
+                // Alert message if the text fields are empty
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Save failed");
                 alert.setContentText("Please fill up the fields first.");

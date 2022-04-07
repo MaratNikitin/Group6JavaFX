@@ -113,25 +113,25 @@ public class ProductEditController {
             }
         });
 
-
+        // txtProductName focus in and focus out event
         txtProductName.focusedProperty().addListener(new ChangeListener<Boolean>()
         {
             @Override
             public void changed(ObservableValue<? extends Boolean> arg0, Boolean oldPropertyValue, Boolean newPropertyValue)
             {
-                if (newPropertyValue)
+                if (newPropertyValue) //focus in
                 {
-                    lblProdName.setVisible(false);
+                    lblProdName.setVisible(false); //set the lblProdName as not visible
                 }
-                else
+                else //focus out
                 {
                     if (txtProductName.getText().length() > 50)
                     {
-                        lblProdName.setVisible(true);
+                        lblProdName.setVisible(true); //set the lblProdName as visible
                     }
                     else
                     {
-                        lblProdName.setVisible(false);
+                        lblProdName.setVisible(false); //set the lblProdName as not visible
                     }
                 }
             }
@@ -198,7 +198,7 @@ public class ProductEditController {
             {
                 if (txtProductName.getText().length() > 50)
                 {
-                    lblProdName.setVisible(true);
+                    lblProdName.setVisible(true); //set the lblProdName as visible
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Save failed");
                     alert.setContentText("Please check the validated textfields.");
@@ -206,7 +206,7 @@ public class ProductEditController {
                 }
                 else
                 {
-                    lblProdName.setVisible(false);
+                    lblProdName.setVisible(false); //set the lblProdName as not visible
                     int numRows = stmt.executeUpdate();
                     conn.close(); // mission accomplished
 
