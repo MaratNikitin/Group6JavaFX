@@ -1,6 +1,6 @@
 /*
 Author: Rebecca Allan;
-Co-Author: , contribution: ;
+Co-Author: Arvin San Juan, contribution: Data Validation Implement;
 Workshop #6 (JavaFX),
 PROJ-207 Threaded Project, Stage 3, Workshop #6 (JavaFX),
 OOSD program, SAIT, March-May 2022;
@@ -11,20 +11,18 @@ This is the controller class responsible for the 'Add/Edit/Delete Products' wind
 
 package group6.travelexperts;
 
-import java.net.URL;
-import java.sql.*;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Optional;
-import java.util.ResourceBundle;
-
-import javafx.event.EventHandler;
-import javafx.fxml.FXML;
-import javafx.scene.Node;
+import javafx.beans.value.*;
+import javafx.event.*;
+import javafx.fxml.*;
+import javafx.scene.*;
 import javafx.scene.control.*;
-import javafx.scene.input.MouseEvent;
-import javafx.stage.Stage;
+import javafx.scene.input.*;
+import javafx.stage.*;
+
+import java.net.*;
+import java.sql.*;
+import java.text.*;
+import java.util.*;
 
 public class ProductEditController {
 
@@ -56,6 +54,9 @@ public class ProductEditController {
     private TextField txtProductName; // Value injected by FXMLLoader
 
     private String mode;
+
+    @FXML // fx:id="lblProdName"
+    private Label lblProdName; // Value injected by FXMLLoader
 
     @FXML // This method is called by the FXMLLoader when initialization is complete
     void initialize() {
@@ -112,6 +113,33 @@ public class ProductEditController {
             }
         });
 
+        // txtProductName focus in and focus out event
+        txtProductName.focusedProperty().addListener(new ChangeListener<Boolean>()
+        {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> arg0, Boolean oldPropertyValue, Boolean newPropertyValue)
+            {
+                if (newPropertyValue) //focus in
+                {
+                    lblProdName.setVisible(false); //set the lblProdName as not visible
+                }
+                else //focus out
+                {
+                    if (txtProductName.getText().length() > 50)
+                    {
+                        lblProdName.setVisible(true); //set the lblProdName as visible
+                    }
+                    else
+                    {
+                        lblProdName.setVisible(false); //set the lblProdName as not visible
+                    }
+                }
+            }
+        });
+
+        //alert messages sets as not visible
+        lblProdName.setVisible(false);
+
     } // end of initialize();
 
     // method for passing mode to the dialog window
@@ -164,14 +192,37 @@ public class ProductEditController {
             if (mode.equals("edit")) {
                 stmt.setInt(2, Integer.parseInt(txtProductID.getText()));
             }
-            int numRows = stmt.executeUpdate();
-            conn.close(); // mission accomplished
 
-            // closing the modal window:
-            Node node = (Node) mouseEvent.getSource();
-            Stage stage = (Stage) node.getScene().getWindow();
-            stage.close();
+            //filter text fields if empty
+            if (!txtProductName.getText().isEmpty())
+            {
+                if (txtProductName.getText().length() > 50)
+                {
+                    lblProdName.setVisible(true); //set the lblProdName as visible
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Save failed");
+                    alert.setContentText("Please check the validated textfields.");
+                    alert.showAndWait();
+                }
+                else
+                {
+                    lblProdName.setVisible(false); //set the lblProdName as not visible
+                    int numRows = stmt.executeUpdate();
+                    conn.close(); // mission accomplished
 
+                    // closing the modal window:
+                    Node node = (Node) mouseEvent.getSource();
+                    Stage stage = (Stage) node.getScene().getWindow();
+                    stage.close();
+                }
+            }
+            else
+            {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Save failed");
+                alert.setContentText("Please enter Product name first.");
+                alert.showAndWait();
+            }
         } //end of try
         catch (SQLException e) {
             e.printStackTrace();
