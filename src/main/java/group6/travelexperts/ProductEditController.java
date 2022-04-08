@@ -125,7 +125,7 @@ public class ProductEditController {
                 }
                 else //focus out
                 {
-                    if (txtProductName.getText().length() > 50)
+                    if (txtProductName.getText().length() > 50) // check if the txtDescription length is greater than 50 character
                     {
                         lblProdName.setVisible(true); //set the lblProdName as visible
                     }
@@ -194,11 +194,12 @@ public class ProductEditController {
             }
 
             //filter text fields if empty
-            if (!txtProductName.getText().isEmpty())
+            if (!txtProductName.getText().isEmpty()) // check if txtProductName if empty
             {
-                if (txtProductName.getText().length() > 50)
+                if (txtProductName.getText().length() > 50) // check if the txtDescription length is greater than 50 character
                 {
                     lblProdName.setVisible(true); //set the lblProdName as visible
+                    // Alert Message
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Save failed");
                     alert.setContentText("Please check the validated textfields.");
@@ -218,6 +219,7 @@ public class ProductEditController {
             }
             else
             {
+                // Alert Message
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Save failed");
                 alert.setContentText("Please enter Product name first.");
