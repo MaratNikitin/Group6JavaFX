@@ -179,21 +179,19 @@ public class PackageEditController {
             @Override
             public void changed(ObservableValue<? extends Boolean> arg0, Boolean oldPropertyValue, Boolean newPropertyValue)
             {
-                if (newPropertyValue)
+                if (newPropertyValue) // txtPackageName focus in
                 {
-                    lblPkgName.setVisible(false);
+                    lblPkgName.setVisible(false); // set lblPkgName as not visible
                 }
-                else
+                else // txtPackageName focus out
                 {
-                    if (txtPackageName.getText().length() > 50)
+                    if (txtPackageName.getText().length() > 50) // check if the txtPackageName length is greater than 50 character
                     {
-                        System.out.println("The Package Name must be less than or equal 50 characters.");
-                        lblPkgName.setVisible(true);
+                        lblPkgName.setVisible(true); // set lblPkgName as visible
                     }
                     else
                     {
-                        System.out.println("The Package Name is " + txtPackageName.getText());
-                        lblPkgName.setVisible(false);
+                        lblPkgName.setVisible(false); // set lblPkgName as not visible
                     }
                 }
             }
@@ -205,14 +203,15 @@ public class PackageEditController {
             @Override
             public void changed(ObservableValue<? extends Boolean> arg0, Boolean oldPropertyValue, Boolean newPropertyValue)
             {
-                if (newPropertyValue)
+                if (newPropertyValue) // txtStartDate focus in
                 {
-                    lblPkgStartDate.setVisible(false);
+                    lblPkgStartDate.setVisible(false); // set lblPkgName as not visible
                 }
-                else
+                else // txtStartDate focus out
                 {
-                    if (txtStartDate.getText()  != "")
+                    if (txtStartDate.getText()  != "") // check if txtStartDate is not equal to ""
                     {
+                        //Format Date
                         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
                         //To make strict date format validation
                         formatter.setLenient(false);
@@ -220,13 +219,13 @@ public class PackageEditController {
                         try {
                             parsedDate = formatter.parse(txtStartDate.getText());
                             System.out.println("StartDate is " + formatter.format(parsedDate));
-                            lblPkgStartDate.setVisible(false);
+                            lblPkgStartDate.setVisible(false); // set lblPkgStartDate as not visible
                         } catch (ParseException e) {
-                            lblPkgStartDate.setVisible(true);
+                            lblPkgStartDate.setVisible(true); // set lblPkgStartDate as visible
                         }
                     }
                 }
-                checkDates();
+                checkDates(); // method for checking start date and end date
             }
         });
 
@@ -236,14 +235,15 @@ public class PackageEditController {
             @Override
             public void changed(ObservableValue<? extends Boolean> arg0, Boolean oldPropertyValue, Boolean newPropertyValue)
             {
-                if (newPropertyValue)
+                if (newPropertyValue) // txtEndDate focus in
                 {
-                    lblPkgEndDate.setVisible(false);
+                    lblPkgEndDate.setVisible(false); // set lblPkgEndDate as not visible
                 }
-                else
+                else // txtEndDate focus out
                 {
-                    if (txtEndDate.getText() != "")
+                    if (txtEndDate.getText() != "") // check if txtEndDate is not equal to ""
                     {
+                        //Format Date
                         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
                         //To make strict date format validation
                         formatter.setLenient(false);
@@ -251,13 +251,13 @@ public class PackageEditController {
                         try {
                             parsedDate = formatter.parse(txtEndDate.getText());
                             System.out.println("EndDate is " + formatter.format(parsedDate));
-                            lblPkgEndDate.setVisible(false);
+                            lblPkgEndDate.setVisible(false); // set lblPkgEndDate as not visible
                         } catch (ParseException e) {
-                            lblPkgEndDate.setVisible(true);
+                            lblPkgEndDate.setVisible(true); // set lblPkgEndDate as visible
                         }
                     }
                 }
-                checkDates();
+                checkDates(); // method for checking start date and end date
             }
         });
 
@@ -267,23 +267,23 @@ public class PackageEditController {
             @Override
             public void changed(ObservableValue<? extends Boolean> arg0, Boolean oldPropertyValue, Boolean newPropertyValue)
             {
-                if (newPropertyValue)
+                if (newPropertyValue) // txtDescription focus in
                 {
-                    lblPkgDescription.setVisible(false);
+                    lblPkgDescription.setVisible(false); // set lblPkgEndDate as not visible
                 }
-                else
+                else // txtDescription focus out
                 {
-                    if (txtDescription.getText().length() > 50)
+                    if (txtDescription.getText().length() > 50) // check if the txtDescription length is greater than 50 character
                     {
-                        lblPkgDescription.setVisible(true);
+                        lblPkgDescription.setVisible(true); // set lblPkgEndDate as visible
                     }
                     else
                     {
-                        if (txtDescription.getText() != "")
+                        if (txtDescription.getText() != "") // check if the txtDescription is not equal to ""
                         {
                             System.out.println("The Description is " + txtDescription.getText());
                         }
-                        lblPkgDescription.setVisible(false);
+                        lblPkgDescription.setVisible(false); // set lblPkgEndDate as not visible
                     }
                 }
             }
@@ -293,6 +293,7 @@ public class PackageEditController {
         txtBasePrice.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                // check if txtBasePrice is decimal
                 if (!newValue.matches("\\d*(\\.\\d*)?")) {
                     txtBasePrice.setText(oldValue);
                 }
@@ -305,27 +306,28 @@ public class PackageEditController {
             @Override
             public void changed(ObservableValue<? extends Boolean> arg0, Boolean oldPropertyValue, Boolean newPropertyValue)
             {
-                if (newPropertyValue)
+                if (newPropertyValue) // txtBasePrice focus in
                 {
-                    lblPkgPrice.setVisible(false);
+                    lblPkgPrice.setVisible(false); // set lblPkgPrice as not visible
                 }
-                else
+                else // txtBasePrice focus out
                 {
-                    if (txtBasePrice.getText() != "")
+                    if (txtBasePrice.getText() != "") // check if the txtBasePrice is not equal to ""
                     {
+                        // this line is to check if the inputed data is negative or positive
                         double res = Math.signum(Double.parseDouble(txtBasePrice.getText()));
                         if (res == 1.0)
                         {
                             System.out.println("The Base Price is " + Double.parseDouble(txtBasePrice.getText()));
-                            lblPkgPrice.setVisible(false);
+                            lblPkgPrice.setVisible(false); // set lblPkgPrice as not visible
                         }
                         else
                         {
-                            lblPkgPrice.setVisible(true);
+                            lblPkgPrice.setVisible(true); // set lblPkgPrice as visible
                         }
                     }
                 }
-                checkPriceCommission();
+                checkPriceCommission(); // method for checking the Base Price amount and Commission amount
             }
         });
 
@@ -333,6 +335,7 @@ public class PackageEditController {
         txtCommission.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                // check if txtCommission is decimal
                 if (!newValue.matches("\\d*(\\.\\d*)?")) {
                     txtCommission.setText(oldValue);
                 }
@@ -345,42 +348,41 @@ public class PackageEditController {
             @Override
             public void changed(ObservableValue<? extends Boolean> arg0, Boolean oldPropertyValue, Boolean newPropertyValue)
             {
-                if (newPropertyValue)
+                if (newPropertyValue) // txtBasePrice focus in
                 {
                     lblPkgCommission.setVisible(false); // set lblPkgCommission as not visible
                 }
-                else
+                else // txtBasePrice focus out
                 {
-                    if (txtCommission.getText() != "")
+                    if (txtCommission.getText() != "") // check if the txtCommission is not equal to ""
                     {
                         // this line is to check if the inputed data is negative or positive
                         double res = Math.signum(Double.parseDouble(txtCommission.getText()));
                         if (res == 1.0)
                         {
                             System.out.println("The Commission is " + Double.parseDouble(txtCommission.getText()));
-                            lblPkgCommission.setVisible(false);// set lblPkgCommission as not visible
+                            lblPkgCommission.setVisible(false); // set lblPkgCommission as not visible
                         }
                         else
                         {
-                            lblPkgCommission.setVisible(true);// set lblPkgCommission as visible
+                            lblPkgCommission.setVisible(true); // set lblPkgCommission as visible
                         }
                     }
                 }
-                checkPriceCommission();
+                checkPriceCommission(); // method for checking the Base Price amount and Commission amount
             }
         });
 
-        //alert messages sets as not visible
-        lblPkgName.setVisible(false);
-        lblPkgStartDate.setVisible(false);
-        lblPkgStartDateAlert.setVisible(false);
-        lblPkgEndDate.setVisible(false);
-        lblPkgEndDateAlert.setVisible(false);
-        lblPkgPrice.setVisible(false);
-        lblPkgPriceAlert.setVisible(false);
-        lblPkgDescription.setVisible(false);
-        lblPkgCommission.setVisible(false);
-        lblPkgCommissionAlert.setVisible(false);
+        lblPkgName.setVisible(false); // set lblPkgName as not visible
+        lblPkgStartDate.setVisible(false); // set lblPkgStartDate as not visible
+        lblPkgStartDateAlert.setVisible(false); // set lblPkgStartDateAlert as not visible
+        lblPkgEndDate.setVisible(false); // set lblPkgEndDate as not visible
+        lblPkgEndDateAlert.setVisible(false); // set lblPkgEndDateAlert as not visible
+        lblPkgPrice.setVisible(false); // set lblPkgPrice as not visible
+        lblPkgPriceAlert.setVisible(false); // set lblPkgPriceAlert as not visible
+        lblPkgDescription.setVisible(false); // set lblPkgDescription as not visible
+        lblPkgCommission.setVisible(false); // set lblPkgCommission as not visible
+        lblPkgCommissionAlert.setVisible(false); // set lblPkgCommissionAlert as not visible
 
     } // end of initialize();
 
@@ -388,17 +390,17 @@ public class PackageEditController {
     public void checkDates(){
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         try {
-            Date StartDate = sdf.parse(txtStartDate.getText());
-            Date EndDate = sdf.parse(txtEndDate.getText());
+            Date StartDate = sdf.parse(txtStartDate.getText()); // declare variable and assign value of txtStartDate
+            Date EndDate = sdf.parse(txtEndDate.getText());  // declare variable and assign value of txtEndDate
             if (StartDate.after(EndDate))
             {
-                lblPkgStartDateAlert.setVisible(true);
-                lblPkgEndDateAlert.setVisible(true);
+                lblPkgStartDateAlert.setVisible(true); // set lblPkgStartDateAlert as visible
+                lblPkgEndDateAlert.setVisible(true); // set lblPkgEndDateAlert as visible
             }
             else
             {
-                lblPkgStartDateAlert.setVisible(false);
-                lblPkgEndDateAlert.setVisible(false);
+                lblPkgStartDateAlert.setVisible(false); // set lblPkgStartDateAlert as not visible
+                lblPkgEndDateAlert.setVisible(false); // set lblPkgEndDateAlert as not visible
             }
         } catch (ParseException e) {
             e.printStackTrace();
@@ -407,34 +409,34 @@ public class PackageEditController {
 
     //check Base Price and Commission if Base Price is greater than Commission
     public void checkPriceCommission(){
-        Double BasePrice = Double.parseDouble(txtBasePrice.getText());
-        Double Commission = Double.parseDouble(txtCommission.getText());
+        Double BasePrice = Double.parseDouble(txtBasePrice.getText());  // declare variable and assign value of txtBasePrice
+        Double Commission = Double.parseDouble(txtCommission.getText());  // declare variable and assign value of txtCommission
         if(BasePrice > Commission)
         {
-            lblPkgPriceAlert.setVisible(false);
-            lblPkgCommissionAlert.setVisible(false);
+            lblPkgPriceAlert.setVisible(false); // set lblPkgStartDateAlert as visible
+            lblPkgCommissionAlert.setVisible(false); // set lblPkgStartDateAlert as visible
         }
         else
         {
-            if(!lblPkgPrice.isVisible())
+            if(!lblPkgPrice.isVisible()) // check if lblPkgPrice is not visible
             {
-                lblPkgPriceAlert.setVisible(true);
-                lblPkgPrice.setVisible(false);
+                lblPkgPriceAlert.setVisible(true); // set lblPkgPriceAlert as visible
+                lblPkgPrice.setVisible(false); // set lblPkgPrice as not visible
             }
             else
             {
-                lblPkgPriceAlert.setVisible(false);
-                lblPkgPrice.setVisible(true);
+                lblPkgPriceAlert.setVisible(false); // set lblPkgPriceAlert as not visible
+                lblPkgPrice.setVisible(true); // set lblPkgPrice as visible
             }
-            if(!lblPkgCommission.isVisible())
+            if(!lblPkgCommission.isVisible()) // check if lblPkgCommission is not visible
             {
-                lblPkgCommissionAlert.setVisible(true);
-                lblPkgCommission.setVisible(false);
+                lblPkgCommissionAlert.setVisible(true); // set lblPkgCommissionAlert as visible
+                lblPkgCommission.setVisible(false); // set lblPkgCommission as not visible
             }
             else
             {
-                lblPkgCommissionAlert.setVisible(false);
-                lblPkgCommission.setVisible(true);
+                lblPkgCommissionAlert.setVisible(false); // set lblPkgCommissionAlert as not visible
+                lblPkgCommission.setVisible(true); // set lblPkgCommission as visible
             }
         }
     }
